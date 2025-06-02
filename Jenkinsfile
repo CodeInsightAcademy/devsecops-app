@@ -6,13 +6,13 @@ pipeline {
     }
 
     environment {
-        IMAGE = 'yourdockerhubusername/my-secure-app'
+        IMAGE = 'codeinsightacademy25/my-secure-app'
     }
 
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/yourname/my-secure-app.git'
+                git 'https://github.com/CodeInsightAcademy/devsecops-app.git'
             }
         }
 
