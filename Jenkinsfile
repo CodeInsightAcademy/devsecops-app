@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3' // or use Python if it's a Python app
+        maven 'Maven' // or use Python if it's a Python app
     }
 
     environment {
