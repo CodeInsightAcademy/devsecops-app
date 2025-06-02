@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven' // or use Python if it's a Python app
-    }
+    // tools {
+    //     maven 'Maven' // or use Python if it's a Python app
+    // }
 
     environment {
         IMAGE = 'codeinsightacademy25/my-secure-app'
