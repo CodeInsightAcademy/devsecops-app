@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    // tools {
-    //     maven 'Maven' // or use Python if it's a Python app
-    // }
-
     environment {
         IMAGE = 'codeinsightacademy25/my-secure-app'
     }
@@ -18,7 +14,16 @@ pipeline {
 
         stage('Dependency Vulnerability Check') {
             steps {
-                sh 'dependency-check.sh --project MyApp --scan . --format HTML'
+                sh '''
+                    mkdir -p reports
+                    docker run --rm \
+                        -v $(pwd):/src \
+                        owasp/dependency-check \
+                        --project MyApp \
+                        --scan /src \
+                        --format HTML \
+                        --out /src/reports
+                '''
             }
         }
 
@@ -58,7 +63,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: '**/dependency-check-report.html', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'reports/**', allowEmptyArchive: true
         }
     }
 }
